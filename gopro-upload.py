@@ -41,7 +41,14 @@ def combine(parts, index):
     output_file = f'/tmp/{index}.mp4'
     print(f'***** Combining into {output_file} *****')
     try:
-        subprocess.check_call(['ffmpeg', '-f', 'concat', '-safe', '0', '-i', create_concat_input_file(parts, index), '-c', 'copy', output_file])
+        subprocess.check_call([
+            'ffmpeg',
+            '-f', 'concat',
+            '-safe', '0',
+            '-i', create_concat_input_file(parts, index),
+            '-c', 'copy',
+            output_file
+        ])
     except subprocess.CalledProcessError:
         error(f'There was an issue combining the following parts with ffmpeg: {parts}')
     return output_file
